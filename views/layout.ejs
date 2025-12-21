@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= typeof title !=='undefined' ? title : 'My Blog' %>
+    </title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container"> <a href="/" class="nav-logo">📝 My Blog</a>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/new" class="nav-link btn-new">+ New Post</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main class="main-content">
+         <%- body %> 
+    </main>
+    <footer class="footer">
+        <p>© 2025 My Blog. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

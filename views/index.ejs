@@ -1,0 +1,48 @@
+<% layout('layout') %>
+
+    <div class="container">
+
+        <section class="hero">
+            <h1>Welcome to My Blog📰</h1>
+            <p>Discover insightful articles and stories✍️</p>
+        </section>
+
+        <% if (typeof error !=='undefined' ) { %>
+            <div class="alert alert-danger">
+                <%= error %>
+            </div>
+        <% } %>
+
+        <% if (posts.length === 0) { %>
+            <div class="empty-state">
+                <h2>No posts yet</h2>
+                <p>Start writing your first blog post today!</p> 
+                <a href="/new" class="btn btn-primary">Create First Post</a>
+            </div>
+        <% } else { %>
+
+        <section class="posts-grid">
+            <% posts.forEach(post=> { %> 
+            <article class="post-card">
+
+                <div class="post-header">
+                    <h2><a href="/<%= post.id %>"> <%= post.title %> </a></h2> 
+                    <small class="post-date"><%= new Date(post.createdAt).toLocaleDateString('en-US', { year: 'numeric' , month: 'long' , day: 'numeric' }) %></small>
+                </div>
+
+                <p class="post-excerpt"><%= post.content.substring(0, 100) %><%= post.content.length > 100 ? '...' : '' %></p>
+                
+                <div class="post-footer"> 
+                    <a href="/<%= post.id %>" class="btn btn-sm btn-secondary">Read More</a> 
+                </div>
+
+                <div class="post-actions">
+                    <form action="/posts/<%= post.id %>/delete" method="POST" class="inline-form">
+                        <button type="submit" class="btn-danger" onclick="return confirm('Are you sure you want to delete this post?');">🗑️ Delete </button>
+                    </form>
+                </div>
+            </article>
+            <% }); %>
+        </section>
+        <% } %>
+    </div>
