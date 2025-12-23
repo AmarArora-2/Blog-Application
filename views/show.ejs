@@ -1,0 +1,29 @@
+<% layout('layout') %>
+    <div class="container">
+        <article class="post-full">
+            <div class="post-header-full">
+                <h1>
+                    <%= post.title %>
+                </h1>
+                <div class="post-meta"> 
+                    <span class="post-date"> Published: <%= new Date(post.createdAt).toLocaleDateString('en-US', { year: 'numeric' , month: 'long' ,
+                            day: 'numeric' , hour: '2-digit' , minute: '2-digit' }) %> </span>
+                    <% if (post.updatedAt !==post.createdAt) { %> 
+                        <span class="post-update"> Updated: <%= new Date(post.updatedAt).toLocaleDateString('en-US', { year: 'numeric' , month: 'long' ,
+                            day: 'numeric' }) %> </span>
+                        <% } %>
+                </div>
+            </div>
+            <div class="post-content">
+                <%= post.content %>
+            </div>
+            <div class="post-actions"> 
+                <a href="/<%= post.id %>/edit" class="btn btn-primary">✏️ Edit</a>
+                <form method="POST" action="/<%= post.id %>/delete" class="delete-form"> 
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure? This action cannot be undone.');">
+                        🗑️ Delete </button> 
+                </form> 
+                <a href="/" class="btn btn-secondary">← Back to Posts</a>
+            </div>
+        </article>
+    </div>
